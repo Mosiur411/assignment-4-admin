@@ -51,11 +51,11 @@ export default function Order() {
           <h2 className="text-2xl font-bold mb-4">Order Product</h2>
           
         </div>
-        <ProductOrderTable
+       {/*  <ProductOrderTable
           products={products}
           onEdit={handleEdit}
           onDelete={handleDelete}
-        />
+        /> */}
       </div>
 
       {/* Delete Confirmation Modal */}

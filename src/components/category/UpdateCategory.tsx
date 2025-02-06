@@ -57,7 +57,7 @@ const UpdateCategory = ({ isEditModalOpen, setIsEditModalOpen }) => {
                             <input {...register("title", { required: "Title is required" })}
                                 defaultValue={isEditModalOpen?.data?.title}
                                 className="w-full p-2 border rounded-lg" />
-                            {errors.title && <p className=" text-danger text-sm mt-2 lowercase ">{errors.title.message}</p>}
+                            {errors.title && <p className=" text-danger text-sm mt-2 lowercase ">{errors.title.message as string}</p>}
                         </div>
 
                         <div>

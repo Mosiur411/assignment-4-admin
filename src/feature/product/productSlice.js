@@ -1,16 +1,6 @@
 import { baseApi } from '@/store/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-interface IProduct {
-  data: unknown;
-  _id?: string;
-  title: string;
-  author: string;
-  genre: string;
-  price: number;
-  publicationDate: string;
-  image?: string;
-}
 
 export const apiSlice = createApi({
   reducerPath: 'apiProducts',
@@ -18,19 +8,19 @@ export const apiSlice = createApi({
   tagTypes: ['Products'],
   endpoints: (builder) => ({
     // GET all products
-    getProducts: builder.query<IProduct[], void>({
+    getProducts: builder.query({
       query: () => 'products',
       providesTags: ['Products'],
     }),
 
     // GET single product
-    getProduct: builder.query<IProduct, string>({
+    getProduct: builder.query({
       query: (id) => `products/${id}`,
       providesTags: ['Products'],
     }),
 
     // POST new product
-    addProduct: builder.mutation<IProduct, Partial<IProduct>>({
+    addProduct: builder.mutation({
       query: (product) => ({
         url: 'products',
         method: 'POST',
@@ -40,7 +30,7 @@ export const apiSlice = createApi({
     }),
 
     // PUT update product
-    updateProduct: builder.mutation<IProduct, { id: string; data: Partial<IProduct> }>({
+    updateProduct: builder.mutation({
       query: ({ id, data }) => ({
         url: `products/${id}`,
         method: 'PATCH',
@@ -50,7 +40,7 @@ export const apiSlice = createApi({
     }),
 
     // DELETE product
-    deleteProduct: builder.mutation<void, string>({
+    deleteProduct: builder.mutation({
       query: (id) => ({
         url: `products/${id}`,
         method: 'DELETE',

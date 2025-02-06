@@ -5,24 +5,23 @@ import LoadingSpinner from "./LoadingSpinner";
 // Define the props for the Button component
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "outlined" | "texted" | "texted-outlined" | "table-action";
-  size?: "big" | "slim" | "small";
+  variant?: "primary" | "secondary" | "outlined" | "texted" | "texted-outlined" | "table-action" |'outline';
+  size?: "big" | "slim" | "small"| 'sm' |'icon';
   type?: "button" | "submit" | "reset";
   loading?: boolean;
   className?: string;
 }
-
 const Button: React.FC<ButtonProps> = ({
   children,
   variant = "primary",
-  size = "big",
+  size= "big",
   type = "button",
   loading = false,
   className,
   ...rest
 }) => {
   // If the variant is 'table-action', override the size
-  if (variant === "table-action") size = "";
+  if (variant === "table-action") size = "sm";
 
   return (
     <button

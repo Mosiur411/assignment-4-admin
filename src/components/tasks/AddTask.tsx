@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
+import Button from "../ui/Button"
 
 
 export function AddTask() {
@@ -28,7 +28,7 @@ export function AddTask() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add Task</Button>
+        <Button >Add Task</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
             <DialogDescription className="sr-only">

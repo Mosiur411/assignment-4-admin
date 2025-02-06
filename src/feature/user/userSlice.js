@@ -1,13 +1,7 @@
 import { baseApi } from '@/store/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-interface IUser {
-    _id?: string;
-    name?: string;
-    email?: string;
-    role?: string;
-    isBlocked?: boolean;
-}
+
 
 export const userSlice = createApi({
     reducerPath: 'apiUser',
@@ -20,7 +14,7 @@ export const userSlice = createApi({
             providesTags: ['User'],
         }),
         // PUT update User
-        updateUser: builder.mutation<IUser, { id: string; data: Partial<IUser> }>({
+        updateUser: builder.mutation({
             query: ({ id, data }) => ({
                 url: `user/${id}`,
                 method: 'PUT',
@@ -29,7 +23,7 @@ export const userSlice = createApi({
             invalidatesTags: ['User'],
         }),
         // DELETE User
-        deleteUser: builder.mutation<void, string>({
+        deleteUser: builder.mutation({
             query: (id) => ({
                 url: `user/${id}`,
                 method: 'DELETE',

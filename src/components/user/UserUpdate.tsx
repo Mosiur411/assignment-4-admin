@@ -57,7 +57,7 @@ const UserUpdate = ({ isEditModalOpen, setIsEditModalOpen }) => {
                                 {...register("isBlocked", { required: "Status is required" })}
                             >
                                 {userStatus.map((dt) => (
-                                    <option key={dt.status} value={dt.status}>
+                                    <option key={dt.name} value={String(dt.status)}>
                                         {dt.name}
                                     </option>
                                 ))}

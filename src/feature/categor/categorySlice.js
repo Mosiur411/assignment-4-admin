@@ -1,26 +1,21 @@
 import { baseApi } from '@/store/baseApi';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-interface ICategory {
-    data?: unknown;
-    _id?: string;
-    title?: string;
-    sulg?: string;
-}
+
 export const categorySlice = createApi({
     reducerPath: 'apicategory',
     baseQuery: baseApi,
     tagTypes: ['Category'],
     endpoints: (builder) => ({
         // GET all products
-        getCategory: builder.query<ICategory[], void>({
+        getCategory: builder.query({
             query: () => 'categorys',
             providesTags: ['Category'],
         }),
 
 
         // POST new product
-        addCategory: builder.mutation<ICategory, Partial<ICategory>>({
+        addCategory: builder.mutation({
             query: (product) => ({
                 url: 'categorys',
                 method: 'POST',
@@ -30,7 +25,7 @@ export const categorySlice = createApi({
         }),
 
         // PUT update product
-        updateCategory: builder.mutation<ICategory, { id: string; data: Partial<ICategory> }>({
+        updateCategory: builder.mutation({
             query: ({ id, data }) => ({
                 url: `categorys/${id}`,
                 method: 'PUT',
@@ -40,7 +35,7 @@ export const categorySlice = createApi({
         }),
 
         // DELETE product
-        deleteCategory: builder.mutation<void, string>({
+        deleteCategory: builder.mutation({
             query: (id) => ({
                 url: `categorys/${id}`,
                 method: 'DELETE',

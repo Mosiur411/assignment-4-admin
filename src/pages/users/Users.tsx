@@ -1,5 +1,5 @@
 import UserTableTable from "@/components/table/user";
-import { useGetUserQuery } from "@/feature/user/userSlice"
+import { useGetUserQuery } from "@/feature/user/userSlice";
 import { useMemo } from "react"
 
 export default function Users() {
