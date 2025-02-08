@@ -96,19 +96,19 @@ export default function ProductAdd() {
         <div className="w-full  flex justify-center py-5">
           <form onSubmit={handleSubmit(onFormSubmit)} className="w-96 bg-white p-6 rounded-lg shadow-md space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Title</label>
-              <input {...register("title", { required: "Title is required" })} className="w-full p-2 border rounded-lg" />
+              <label className="block text-sm font-medium mb-2">Title <span className="text-danger">*</span></label>
+              <input {...register("title",  { required: "Title is required" })} placeholder="title" className="w-full p-2 border rounded-lg" />
               {errors.title && <p className="text-danger text-sm">{errors.title.message}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Author</label>
-              <input {...register("author", { required: "Author is required" })} className="w-full p-2 border rounded-lg" />
+              <label className="block text-sm font-medium mb-2">Author <span className="text-danger">*</span></label>
+              <input placeholder="author" {...register("author", { required: "Author is required" })} className="w-full p-2 border rounded-lg" />
               {errors.author && <p className="text-danger text-sm">{errors.author.message}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
+              <label className="block text-sm font-medium mb-2">Category <span className="text-danger">*</span></label>
               <select
                 {...register("category", { required: "Category is required" })} className="w-full p-2 border rounded-lg"
               >
@@ -121,31 +121,31 @@ export default function ProductAdd() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Description</label>
-              <textarea {...register("description", { required: "Description is required" })} className="w-full p-2 border rounded-lg" />
+              <label className="block text-sm font-medium mb-2">Description <span className="text-danger">*</span></label>
+              <textarea  placeholder="description" {...register("description", { required: "Description is required" })} className="w-full p-2 border rounded-lg" />
               {errors.description && <p className="text-danger text-sm">{errors.description.message}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Price</label>
-              <input type="number" {...register("price", { required: "Price is required" })} className="w-full p-2 border rounded-lg" />
+              <label className="block text-sm font-medium mb-2">Price <span className="text-danger">*</span></label>
+              <input placeholder="price" type="number" {...register("price", { required: "Price is required" })} className="w-full p-2 border rounded-lg" />
               {errors.price && <p className="text-danger text-sm">{errors.price.message}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Quantity</label>
-              <input type="number" {...register("quantity", { required: "Quantity is required" })} className="w-full p-2 border rounded-lg" />
+              <label className="block text-sm font-medium mb-2">Quantity <span className="text-danger">*</span></label>
+              <input placeholder="quantity" type="number" {...register("quantity", { required: "Quantity is required" })} className="w-full p-2 border rounded-lg" />
               {errors.quantity && <p className="text-danger text-sm">{errors.quantity.message}</p>}
             </div>
 
             <div className="flex items-center">
               <input type="checkbox" {...register("inStock")} className="mr-2" />
-              <label className="text-sm font-medium">In Stock</label>
+              <label className="text-sm font-medium">In Stock </label>
             </div>
 
             {/* Image Upload Section */}
             <div>
-              <label className="block text-sm font-medium mb-2">Upload Image</label>
+              <label className="block text-sm font-medium mb-2">Upload Image <span className="text-danger">*</span></label>
               <input
                 type="file"
                 accept="image/png, image/jpeg"
