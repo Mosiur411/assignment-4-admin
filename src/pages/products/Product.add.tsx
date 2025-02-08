@@ -9,15 +9,6 @@ import { useGetCategoryQuery } from "@/feature/categor/categorySlice";
 const CLOUDINARY_UPLOAD_PRESET = "ecom_preset";
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dbtskylxt/image/upload";
 
-const defaultValues: Omit<TProduct, "image"> = {
-  title: "Sample Book",
-  author: "John Doe",
-  category: "SelfDevelopment",
-  description: "This is a sample book description.",
-  price: 20,
-  quantity: 5,
-  inStock: true,
-};
 
 export default function ProductAdd() {
   const navigate = useNavigate();
@@ -26,7 +17,7 @@ export default function ProductAdd() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const { data: category } = useGetCategoryQuery()
-  const { register, handleSubmit, formState: { errors } } = useForm<Omit<TProduct, "image">>({ defaultValues });
+  const { register, handleSubmit, formState: { errors } } = useForm<Omit<TProduct, "image">>();
 
   // 📌 Function to upload image to Cloudinary
   const uploadImage = async () => {
@@ -89,93 +80,95 @@ export default function ProductAdd() {
       alert("Failed to add product. Please try again.");
     }
   };
-
+  console.log('category',category)
   return (
-    <div className="">
-      <div className="flex justify-between mb-5">
-        <h2 className="text-2xl font-bold">Add Books</h2>
-        <button
-          onClick={() => navigate("/product")}
-          className="bg-primary flex items-center hover:bg-secondary text-white font-bold px-2 py-1 rounded"
-        >
-          <ArrowLeft />
-        </button>
+    <div className="w-full bg-gray-1 ">
+      <div>
+        <div className="flex justify-between mb-5">
+          <h2 className="text-2xl font-bold">Add Bike Shop</h2>
+          <button
+            onClick={() => navigate("/product")}
+            className="bg-primary flex items-center hover:bg-secondary text-white font-bold px-2 py-1 rounded"
+          >
+            <ArrowLeft />
+          </button>
+        </div>
+        <div className="w-full  flex justify-center py-5">
+          <form onSubmit={handleSubmit(onFormSubmit)} className="w-96 bg-white p-6 rounded-lg shadow-md space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Title</label>
+              <input {...register("title", { required: "Title is required" })} className="w-full p-2 border rounded-lg" />
+              {errors.title && <p className="text-danger text-sm">{errors.title.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Author</label>
+              <input {...register("author", { required: "Author is required" })} className="w-full p-2 border rounded-lg" />
+              {errors.author && <p className="text-danger text-sm">{errors.author.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Category</label>
+              <select
+                {...register("category", { required: "Category is required" })} className="w-full p-2 border rounded-lg"
+              >
+                <option selected>Choose Category</option>
+                {
+                  category?.data?.map((ct) => <option value={ct?._id}>{ct?.title}</option>)
+                }
+              </select>
+              {errors.category && <p className="text-danger text-sm">{errors.category.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Description</label>
+              <textarea {...register("description", { required: "Description is required" })} className="w-full p-2 border rounded-lg" />
+              {errors.description && <p className="text-danger text-sm">{errors.description.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Price</label>
+              <input type="number" {...register("price", { required: "Price is required" })} className="w-full p-2 border rounded-lg" />
+              {errors.price && <p className="text-danger text-sm">{errors.price.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Quantity</label>
+              <input type="number" {...register("quantity", { required: "Quantity is required" })} className="w-full p-2 border rounded-lg" />
+              {errors.quantity && <p className="text-danger text-sm">{errors.quantity.message}</p>}
+            </div>
+
+            <div className="flex items-center">
+              <input type="checkbox" {...register("inStock")} className="mr-2" />
+              <label className="text-sm font-medium">In Stock</label>
+            </div>
+
+            {/* Image Upload Section */}
+            <div>
+              <label className="block text-sm font-medium mb-2">Upload Image</label>
+              <input
+                type="file"
+                accept="image/png, image/jpeg"
+                className="w-full p-2 border rounded-lg"
+                onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
+              />
+              {uploading && <p className="text-blue-500 text-sm">Uploading...</p>}
+              {imageUrl && <img src={imageUrl} alt="Uploaded Preview" className="mt-2 h-24 w-24 object-cover rounded-lg" />}
+            </div>
+
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className={`w-1/2 p-2 rounded-lg text-white ${isLoading ? 'bg-gray-400' : 'bg-primary hover:bg-secondary'}`}
+                disabled={isLoading || uploading}
+              >
+                {isLoading || uploading ? "Processing..." : "Submit"}
+              </button>
+            </div>
+          </form>
+        </div>
+
       </div>
-      <div className="w-full bg-red-500">
-        <form onSubmit={handleSubmit(onFormSubmit)} className="max-w-xl bg-white p-6 rounded-lg shadow-md space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Title</label>
-            <input {...register("title", { required: "Title is required" })} className="w-full p-2 border rounded-lg" />
-            {errors.title && <p className="text-danger text-sm">{errors.title.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Author</label>
-            <input {...register("author", { required: "Author is required" })} className="w-full p-2 border rounded-lg" />
-            {errors.author && <p className="text-danger text-sm">{errors.author.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Category</label>
-            <select
-              {...register("category", { required: "Category is required" })} className="w-full p-2 border rounded-lg"
-            >
-              <option selected>Choose Category</option>
-              {
-                category?.data?.map((ct) => <option value={ct?._id}>{ct?.title}</option>)
-              }
-            </select>
-            {errors.category && <p className="text-danger text-sm">{errors.category.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Description</label>
-            <textarea {...register("description", { required: "Description is required" })} className="w-full p-2 border rounded-lg" />
-            {errors.description && <p className="text-danger text-sm">{errors.description.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Price</label>
-            <input type="number" {...register("price", { required: "Price is required" })} className="w-full p-2 border rounded-lg" />
-            {errors.price && <p className="text-danger text-sm">{errors.price.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Quantity</label>
-            <input type="number" {...register("quantity", { required: "Quantity is required" })} className="w-full p-2 border rounded-lg" />
-            {errors.quantity && <p className="text-danger text-sm">{errors.quantity.message}</p>}
-          </div>
-
-          <div className="flex items-center">
-            <input type="checkbox" {...register("inStock")} className="mr-2" />
-            <label className="text-sm font-medium">In Stock</label>
-          </div>
-
-          {/* Image Upload Section */}
-          <div>
-            <label className="block text-sm font-medium">Upload Image</label>
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              className="w-full p-2 border rounded-lg"
-              onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
-            />
-            {uploading && <p className="text-blue-500 text-sm">Uploading...</p>}
-            {imageUrl && <img src={imageUrl} alt="Uploaded Preview" className="mt-2 h-24 w-24 object-cover rounded-lg" />}
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className={`w-1/2 p-2 rounded-lg text-white ${isLoading ? 'bg-gray-400' : 'bg-primary hover:bg-secondary'}`}
-              disabled={isLoading || uploading}
-            >
-              {isLoading || uploading ? "Processing..." : "Submit"}
-            </button>
-          </div>
-        </form>
-      </div>
-
     </div>
   );
 }

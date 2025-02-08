@@ -12,6 +12,10 @@ export const apiSlice = createApi({
       query: () => 'products',
       providesTags: ['Products'],
     }),
+    getOrders: builder.query({
+      query: () => 'order',
+      providesTags: ['Products'],
+    }),
 
     // GET single product
     getProduct: builder.query({
@@ -56,6 +60,7 @@ export const {
   useAddProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetOrdersQuery,
 } = apiSlice;
 
 

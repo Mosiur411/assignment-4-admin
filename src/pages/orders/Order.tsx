@@ -1,13 +1,13 @@
 
 
-import { useDeleteProductMutation, useGetProductsQuery } from "@/feature/product/productSlice";
+import { useDeleteProductMutation, useGetOrdersQuery } from "@/feature/product/productSlice";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import ProductOrderTable from "@/components/table/order";
 
 export default function Order() {
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
+  const { data, isLoading, error } = useGetOrdersQuery(undefined);
   const navigate = useNavigate();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -17,12 +17,9 @@ export default function Order() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
 
-  const products = data?.data || [];
+  const orders = data?.data || [];
 
-  // Placeholder functions for actions
-  const handleEdit = (id: string) => {
-    navigate(`/product/edit-product/${id}`);
-  };
+
 
   const handleDelete = async (id: string) => {
     setProductToDelete(id);
@@ -51,11 +48,10 @@ export default function Order() {
           <h2 className="text-2xl font-bold mb-4">Order Product</h2>
           
         </div>
-       {/*  <ProductOrderTable
-          products={products}
-          onEdit={handleEdit}
+        <ProductOrderTable
+          orders={orders}
           onDelete={handleDelete}
-        /> */}
+        />
       </div>
 
       {/* Delete Confirmation Modal */}
