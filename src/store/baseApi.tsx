@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 export const baseApi = fetchBaseQuery({
-  baseUrl: 'http://localhost:3000/api/',
+  baseUrl: 'https://bikeshopserver.vercel.app/api/',
   prepareHeaders: (headers) => {
     // Retrieve token from localStorage or any state management
     const token = localStorage.getItem('token'); // Adjust as needed

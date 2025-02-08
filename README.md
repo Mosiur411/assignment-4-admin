@@ -47,7 +47,7 @@ The **Bike Shop Admin Panel** is a role-based management system built with **Rea
 Ensure you have **Node.js** and **npm** installed on your machine.
 
 ### Live Site Admin Panel
-Live: [Site](https://bikeshopadmin.vercel.app/)
+Live: [Site](https://bikeshopadmin.vercel.app/) https://bikeshopadmin.vercel.app
 
 ### Steps to Run the Admin Panel
 1. Clone the repository:

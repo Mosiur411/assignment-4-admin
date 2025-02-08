@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_BASE_URL = 'http://localhost:3000/api/';
+const API_BASE_URL = 'https://bikeshopserver.vercel.app/api/';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
