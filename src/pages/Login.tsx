@@ -110,7 +110,7 @@ export default function Login() {
                 type="submit"
                 disabled={isLoading}
                 className={`w-full text-white font-medium transition-all duration-300 p-3 rounded-lg ${
-                  isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-secondary-500 hover:bg-primary-dark"
+                  isLoading ? "bg-secondary-500 cursor-not-allowed" : "bg-secondary-500 hover:bg-secondary-500"
                 }`}
               >
                 {isLoading ? "Logging in..." : "Sign In"}
